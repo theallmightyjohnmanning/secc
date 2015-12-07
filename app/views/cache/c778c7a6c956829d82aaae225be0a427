@@ -1,0 +1,10 @@
+ 
+<?php $__env->startSection('title'); ?>Home <?php $__env->stopSection(); ?> 
+<?php $__env->startSection('content'); ?> 
+<h1><i style="color:#aa0000;">SECC MVC</i></h1>
+<?php if(isset($name)): ?>
+<?php echo e($name); ?>
+
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('templates.frontend.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
