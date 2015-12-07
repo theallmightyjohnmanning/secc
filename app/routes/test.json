@@ -1,0 +1,7 @@
+{
+	"name": "test",
+	"path": "test",
+	"controller": "HomeController",
+	"method":"test",
+	"filters": ["CSRF"]
+}

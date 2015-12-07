@@ -1,0 +1,17 @@
+{
+	"autoload": {
+
+		"psr-4": {
+
+			"SECC\\": "app/"
+		}
+	},
+
+    "require": {
+        "duncan3dc/blade": "^2.2",
+        "illuminate/database": "^5.1",
+        "filp/whoops": "^1.1",
+        "phpmailer/phpmailer": "^5.2",
+        "ircmaxell/random-lib": "^1.1"
+    }
+}

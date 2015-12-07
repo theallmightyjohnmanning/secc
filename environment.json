@@ -1,0 +1,41 @@
+{
+	"db":
+	{
+		"driver": "mysql",
+		"host": "127.0.0.1",
+		"name": "secc",
+		"username": "secc",
+		"password": "password",
+		"charset": "utf8",
+		"collation": "utf8_unicode_ci",
+		"prefix": ""
+	},
+
+	"auth":
+	{
+		"session": "user_id",
+		"remember": "remember_id"
+	},
+
+	"hash":
+	{
+		"algo": 1,
+		"cost": 10
+	},
+
+	"csrf":
+	{
+		"session": "token"
+	},
+
+	"mail":
+	{
+		"smtp": true,
+		"secure": "ssl",
+		"host": "smtp.gmail.com",
+		"username": "john.manning89@gmail.com",
+		"password": "$omeguy1",
+		"port": 465,
+		"html": true
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"services": [
+		
+				"View",
+
+
+				"Config",
+
+
+				"Database",
+
+
+				"ErrorHandler",
+
+
+				"File",
+
+
+				"Hash",
+
+
+				"Input",
+
+
+				"Redirect",
+
+
+				"Route",
+
+
+				"Session",
+
+
+				"Mailer",
+
+				"Token"
+
+			]
+}
