@@ -25,4 +25,4 @@ It is intended to be a set of code that can be used as a basis for most web appl
 * [ircmaxell/random-lib](https://github.com/ircmaxell/RandomLib) - Used for generating secure random hashes
 
 ### Full Framework Documentation ###
-* [Click here to be taken to the full wiki](https://github.com/theallmightyjohnmanning/secc-mvc/wiki)
+* [Click here to be taken to the full wiki](https://github.com/theallmightyjohnmanning/secc/wiki)
