@@ -64,7 +64,7 @@ class Mailer
 		{
 			for($i = 0; $i < count($data->bcc); $i++) 
 			{ 
-				self::$mailer->addCC($data->bcc[$i]);
+				self::$mailer->addBCC($data->bcc[$i]);
 			}
 		}
 
@@ -72,7 +72,7 @@ class Mailer
 		{
 			for($i = 0; $i < count($data->attachments); $i++) 
 			{ 
-				self::$mailer->addCC($data->attachments[$i]);
+				self::$mailer->addAttachment($data->attachments[$i]);
 			}
 		}
 
