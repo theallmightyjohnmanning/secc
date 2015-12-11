@@ -44,22 +44,7 @@ class service
 							'name' => $name
 						]);
 
-						$container = json_decode(file_get_contents('app/containers/services.json'));
-
-						for($i = 0; $i < count($container->services); $i++)
-						{
-							$container->services[$i] = trim($container->services[$i]);
-						}
-
-						$container->services[] = $name;
-
-						$container_template = App::service('View')->make('templates.code.service.services-container', [
-
-							'services' => $container->services
-						]);
-
 						file_put_contents($services_base.$name.'.php', $template);
-						file_put_contents('app/containers/services.json', $container_template);
 						Shell::write("Service successfully created \n", 'green');
 					}
 				break;
@@ -82,26 +67,8 @@ class service
 			}
 			else
 			{
-				$container = json_decode(file_get_contents('app/containers/services.json'));
-
-				for($i = 0; $i < count($container->services); $i++)
-				{
-					$container->services[$i] = trim($container->services[$i]);
-
-					if($container->services[$i] == $name)
-					{
-						$new_services_list = $container->services;
-						unset($new_services_list[$i]);
-						$container_template = App::service('View')->make('templates.code.service.services-container', [
-
-							'services' => $new_services_list
-						]);
-
-						file_put_contents('app/containers/services.json', $container_template);
-						unlink('app/models/services/'.$container->services[$i].'.php');
-						Shell::write("Service successfully deleted \n", 'green');
-					}
-				}
+				unlink('app/models/services/'.$name.'.php');
+				Shell::write("Service successfully deleted \n", 'green');
 			}
 		}
 	}

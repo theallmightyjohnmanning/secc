@@ -7,6 +7,20 @@ namespace SECC\Models\Services;
 
 class Session
 {
+	protected static $instance = null;
+
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+	
 	public static function exists($name)
 	{
 		return (isset($_SESSION[$name])) ? true : false;
@@ -19,7 +33,7 @@ class Session
 
 	public static function get($name)
 	{
-		return $_SESSION[$name];
+		return (isset($_SESSION[$name])) ? $_SESSION[$name] : null;
 	}
 
 	public static function delete($name)

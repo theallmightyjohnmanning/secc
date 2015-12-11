@@ -10,8 +10,21 @@ use RandomLib\Factory as RandomLib;
 class Hash
 {
 	public static $factory;
+	protected static $instance = null;
 
-	public static function passwords($password)
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+
+	public static function password($password)
 	{
 		return password_hash($password, (int)(Config::get('hash.algo')), [
 

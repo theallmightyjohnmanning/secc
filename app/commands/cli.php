@@ -39,21 +39,10 @@ class cli
 				switch ($type)
 				{
 					case 'empty':
-						$container = json_decode(file_get_contents("app/containers/commands.json"));
-						$container->commands[] = $name;
-
-						$container_template = App::service('View')->make('templates.code.command.commands-container', [
-
-							'commands'	=> $container->commands
-						]);
-
 						$command_template = App::service('View')->make('templates.code.command.command-empty', [
 
-							'name'		=> $name,
-							'namespace'	=> 'Commands'
+							'name'	=> $name
 						]);
-
-						file_put_contents('app/containers/commands.json', $container_template);
 						file_put_contents('app/commands/'.$name.'.php', $command_template);
 						Shell::write("Command created successfully! \n", 'green');
 					break;
@@ -77,24 +66,9 @@ class cli
 			}
 			else
 			{
-				$container = json_decode(file_get_contents('app/containers/commands.json'));
-
-				for($i = 0; $i < count($container->commands); $i++)
-				{
-					if($container->commands[$i] == $name)
-					{
-						$new_cli_list = $container->commands;
-						unset($new_cli_list[$i]);
-						$container_template = App::service('View')->make('templates.code.command.commands-container', [
-
-							'commands' => $new_cli_list
-						]);
-
-						file_put_contents('app/containers/commands.json', $container_template);
-						unlink('app/commands/'.$name.'.php');
-						Shell::write("Command successfully deleted. \n", 'green');
-					}
-				}
+				
+				unlink('app/commands/'.$name.'.php');
+				Shell::write("Command successfully deleted. \n", 'green');
 			}
 		}
 	}

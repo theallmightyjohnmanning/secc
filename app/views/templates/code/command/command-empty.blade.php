@@ -4,7 +4,7 @@
 * 
 */
 
-namespace SECC\{!!$namespace!!};
+namespace SECC\Commands;
 
 use SECC\App;
 

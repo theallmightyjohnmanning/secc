@@ -12,7 +12,21 @@ class View
 {
 	protected static $blade;
 
-	private static function instance($views = '../app/views', $cache = '../app/views/cache')
+	protected static $instance = null;
+
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+
+	private static function bladeInstance($views = '../app/views', $cache = '../app/views/cache')
 	{
 		self::$blade = new BladeInstance($views, $cache);
 	}
@@ -20,9 +34,9 @@ class View
 	public static function render($view, $data = null)
 	{
 		if($_SERVER['PHP_SELF'] == 'lace')
-			self::instance('app/views');
+			self::bladeInstance('app/views');
 		else
-			self::instance('../app/views');
+			self::bladeInstance('../app/views');
 
 		if(!isset($data))
 		{
@@ -37,9 +51,9 @@ class View
 	public static function error($view, $data = null)
 	{
 		if($_SERVER['PHP_SELF'] == 'lace')
-			self::instance('app/views/errors');
+			self::bladeInstance('app/views/errors');
 		else
-			self::instance('../app/views/errors');
+			self::bladeInstance('../app/views/errors');
 
 		if(!isset($data))
 		{
@@ -54,9 +68,9 @@ class View
 	public static function make($view, $data = null)
 	{
 		if($_SERVER['PHP_SELF'] == 'lace')
-			self::instance('app/views');
+			self::bladeInstance('app/views');
 		else
-			self::instance('../app/views');
+			self::bladeInstance('../app/views');
 
 		if(!isset($data))
 		{
@@ -71,9 +85,9 @@ class View
 	public static function mail($view, $data = null)
 	{
 		if($_SERVER['PHP_SELF'] == 'lace')
-			self::instance('app/views/emails');
+			self::bladeInstance('app/views/emails');
 		else
-			self::instance('../app/views/emails');
+			self::bladeInstance('../app/views/emails');
 
 		if(!isset($data))
 		{

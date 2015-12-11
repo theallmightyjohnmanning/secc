@@ -11,6 +11,20 @@ class Mailer
 {
 	public static $mailer;
 
+	protected static $instance = null;
+
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+
 	public static function initialize()
 	{
 		self::$mailer = new PHPMailer;
@@ -64,7 +78,7 @@ class Mailer
 		{
 			for($i = 0; $i < count($data->bcc); $i++) 
 			{ 
-				self::$mailer->addBCC($data->bcc[$i]);
+				self::$mailer->addCC($data->bcc[$i]);
 			}
 		}
 
@@ -72,7 +86,7 @@ class Mailer
 		{
 			for($i = 0; $i < count($data->attachments); $i++) 
 			{ 
-				self::$mailer->addAttachment($data->attachments[$i]);
+				self::$mailer->addCC($data->attachments[$i]);
 			}
 		}
 

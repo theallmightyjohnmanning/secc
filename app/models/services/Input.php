@@ -7,6 +7,20 @@ namespace SECC\Models\Services;
 
 class Input
 {
+	protected static $instance = null;
+
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+	
 	public static function exists($type = 'post')
 	{
 		switch($type)

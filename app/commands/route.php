@@ -45,12 +45,9 @@ class route
 
 	private function create_route($name, $type)
 	{
-		$container = json_decode(file_get_contents('app/containers/routes.json'));
 
-		if(!in_array($name, $container->routes))
+		if(!file_exists('app/routes/'.$name.'.json'))
 		{
-			$container->routes[] = $name;
-
 			switch($type)
 			{
 				case 'empty':
@@ -90,7 +87,6 @@ class route
 								]);
 
 								file_put_contents('app/routes/'.$name.'.json', $template);
-								file_put_contents('app/containers/routes.json', json_encode($container));
 								Shell::write("The route $name has been successfully created \n", 'green');
 								$run = false;
 							}
@@ -120,18 +116,8 @@ class route
 			}
 			else
 			{
-				$container = json_decode(file_get_contents('app/containers/routes.json'));
-
-				for($i = 0; $i < count($container->routes); $i++)
-				{
-					if($container->routes[$i] == $name)
-					{
-						unset($container->routes[$i]);
-						file_put_contents('app/containers/routes.json', json_encode($container));
-						unlink('app/routes/'.$name.'.json');
-						Shell::write("Route successfully deleted. \n", 'green');
-					}
-				}
+				unlink('app/routes/'.$name.'.json');
+				Shell::write("Route successfully deleted. \n", 'green');
 			}
 		}
 	}

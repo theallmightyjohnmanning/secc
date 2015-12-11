@@ -11,6 +11,20 @@ class Route
 	protected static $routes	= [];
 	protected static $params 	= [];
 
+	protected static $instance = null;
+
+	private function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+
 	public static function get_url()
 	{
 		(Input::get('url')) ? self::$url[] = Input::get('url') : self::$url[] = '/';
@@ -21,13 +35,14 @@ class Route
 		self::get_url();
 		$url = self::$url[0];
 
-		$routes_container = json_decode(file_get_contents('../app/containers/routes.json'));
+		$routes_container = scandir('../app/routes');
 
 		$route = [];
 
-		for($i = 0; $i < count($routes_container->routes); $i++)
+		for($i = 0; $i < count($routes_container); $i++)
 		{
-			$routes[] = json_decode(file_get_contents('../app/routes/'.$routes_container->routes[$i].'.json'));
+			if($routes_container[$i] != '.' && $routes_container[$i] != '..')
+				$routes[] = json_decode(file_get_contents('../app/routes/'.$routes_container[$i]));
 		}
 
 		self::$routes[] = $routes;

@@ -12,6 +12,20 @@ use Illuminate\Container\Container;
 class Database extends Capsule
 {
 	protected static $capsule;
+	protected static $instance = null;
+
+	public function __construct()
+	{
+
+	}
+
+	public static function instance()
+	{
+		if(!isset(self::$instance))
+			self::$instance = new self;
+		return self::$instance;
+	}
+	
 	public static function initialize()
 	{
 		self::$capsule = new Capsule;

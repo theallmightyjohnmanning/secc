@@ -25,8 +25,12 @@ class LACE
 				echo "\n";
 				Shell::write(self::$commands[$i]." \n", "light_green");
 				$command = "SECC\\Commands\\".self::$commands[$i];
-				$command = new $command;
-				$command->help();
+				if(class_exists($command))
+				{
+					$command = new $command;
+					$command->help();
+				}
+
 			}
 		}
 
@@ -87,8 +91,18 @@ class LACE
 
 	public static function setValidCommands()
 	{
-		$container = json_decode(file_get_contents('app/containers/commands.json'));
-		self::$commands = $container->commands;
+		
+
+		$commands = scandir('app/commands');
+
+		for($i = 0; $i < count($commands); $i++)
+		{
+			if($commands[$i] != '.' && $commands[$i] != '..' && $commands[$i] != 'LACE.php' && $commands[$i] != 'Shell.php')
+			{
+				$commands[$i] = explode('.', $commands[$i]);
+				self::$commands[] = $commands[$i][0];
+			}
+		}
 	}
 
 	public static function header()

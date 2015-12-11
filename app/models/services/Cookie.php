@@ -1,15 +1,11 @@
 <?php
-
 /**
 *
 */
 
 namespace SECC\Models\Services;
 
-use Whoops\Run;
-use Whoops\Handler\PrettyPageHandler;
-
-class ErrorHandler
+class Cookie
 {
 	protected static $instance = null;
 
@@ -27,9 +23,6 @@ class ErrorHandler
 	
 	public static function initialize()
 	{
-		$whoops = new Run;
-		$handler = new PrettyPageHandler;
-
-		$whoops->pushHandler($handler)->register();
+		
 	}
 }

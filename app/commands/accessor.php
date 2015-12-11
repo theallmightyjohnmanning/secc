@@ -44,22 +44,7 @@ class accessor
 							'name' => $name
 						]);
 
-						$container = json_decode(file_get_contents('app/containers/accessors.json'));
-
-						for($i = 0; $i < count($container->accessors); $i++)
-						{
-							$container->accessors[$i] = trim($container->accessors[$i]);
-						}
-
-						$container->accessors[] = $name;
-
-						$container_template = App::service('View')->make('templates.code.accessor.accessors-container', [
-
-							'accessors' => $container->accessors
-						]);
-
 						file_put_contents($accessors_base.$name.'.php', $template);
-						file_put_contents('app/containers/accessors.json', $container_template);
 						Shell::write("accessor successfully created \n", 'green');
 					}
 				break;
@@ -82,26 +67,8 @@ class accessor
 			}
 			else
 			{
-				$container = json_decode(file_get_contents('app/containers/accessors.json'));
-
-				for($i = 0; $i < count($container->accessors); $i++)
-				{
-					$container->accessors[$i] = trim($container->accessors[$i]);
-
-					if($container->accessors[$i] == $name)
-					{
-						$new_accessors_list = $container->accessors;
-						unset($new_accessors_list[$i]);
-						$container_template = App::service('View')->make('templates.code.accessor.accessors-container', [
-
-							'accessors' => $new_accessors_list
-						]);
-
-						file_put_contents('app/containers/accessors.json', $container_template);
-						unlink('app/models/accessors/'.$container->accessors[$i].'.php');
-						Shell::write("accessor successfully deleted \n", 'green');
-					}
-				}
+				unlink('app/models/accessors/'.$name.'.php');
+				Shell::write("accessor successfully deleted \n", 'green');
 			}
 		}
 	}
